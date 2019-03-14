@@ -4,7 +4,7 @@ Template Name: Native Ads - Article
 Template Post Type: Post
 */
 
-// require_once( 'functions.native.php' );
+require_once( 'functions.native.php' );
 get_header( 'native' ); ?>
 
 <div class="container">
