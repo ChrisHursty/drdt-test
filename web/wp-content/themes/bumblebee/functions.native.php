@@ -5,22 +5,6 @@
 // --- Native Ads --- //
 // Native Header
 add_action(
-	'header_after_logo',
-	function() {
-		$header_logo = native_content_get_field( 'header_logo' );
-		?>
-	<div id="header-sponsor-logo">
-		<?php if ( ! empty( $header_logo ) ) : ?>
-			<img src="<?php echo $header_logo['url']; ?>">
-		<?php endif; ?>
-	</div>
-		<?php
-	},
-	10,
-	1
-);
-
-add_action(
 	'header_after_main_menu',
 	function() {
 		if ( is_single() ) :

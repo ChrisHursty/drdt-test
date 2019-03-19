@@ -9,8 +9,9 @@
  * @package bumblebee
  */
 
-wp_enqueue_style( 'bumblebee-style-header', get_stylesheet_directory_uri() . '/header.css', [], '1.0.2' );
+wp_enqueue_style( 'bumblebee-style-header-native', get_stylesheet_directory_uri() . '/header-native.css', [], '1.0.2' );
 $fbid = get_theme_mod( 'fbid', false );
+$header_logo = native_content_get_field( 'header_logo' );
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?> class="no-js">
@@ -42,10 +43,16 @@ $fbid = get_theme_mod( 'fbid', false );
 		<a data-analytics-metrics='{"name":"home logo","module":"header","position":"secondary navigation"}' href="/" class="pure-u-sm-1 pure-u-md-2-5 logo">
 			<img src="<?php echo esc_html( get_theme_mod( 'bumblebee_header_logo' ) ); ?>" alt="<?php echo esc_html( get_bloginfo( 'name' ) ); ?>" style="width:<?php echo esc_html( get_theme_mod( 'bumblebee_header_logo_width' ) ); ?>px"></img>
 		</a>
-
+		<div class="pure-u-sm-1 pure-u-md-2-5">
+			<div id="header-sponsor-logo">
+				<?php if ( ! empty( $header_logo ) ) : ?>
+					<img src="<?php echo $header_logo['url']; ?>">
+				<?php endif; ?>
+			</div>
+		</div>
 		<div class="pure-u-1-4 mobile-hide">
 		</div>
-		<div class="pure-u-sm-1 pure-u-md-2-5 logo">Hellllloooooo</div>
+		
 		<div class="pure-u-md-1-5 newsletter-signup-header mobile-hide">
 			<a class="subscribe-header" target="_blank" rel="noopener" href="<?php echo esc_html( get_theme_mod( 'bumblebee_header_subscribe_url' ) ); ?>">
 				<img src="<?php echo esc_html( get_theme_mod( 'bumblebee_header_subscribe_image' ) ); ?>" alt="" style="width:<?php echo esc_html( get_theme_mod( 'bumblebee_header_subscribe_width' ) ); ?>px"></img>
@@ -100,22 +107,13 @@ $fbid = get_theme_mod( 'fbid', false );
 	</nav>
 </header>
 
-<?php $bumblebee_banner_url = get_theme_mod( 'bumblebee_banner_url' ); ?>
-<?php $bumblebee_banner_text = get_theme_mod( 'bumblebee_banner_text' ); ?>
-<?php if ( ! empty( $bumblebee_banner_text ) ) : ?>
-	<div class="pure-g newsletter-sign-below-header hide-on-mobile">
-		<div class="pure-u-sm-1 pure-u-md-1 pure-u-lg-1 pure-u-xl-1 nl-signup-link">
-			<a data-analytics-metrics='{"name":"<?php echo esc_url( get_theme_mod( 'bumblebee_banner_url' ) ); ?>","module":"header","position":"internal promotion"}' href="<?php echo esc_url( $bumblebee_banner_url ); ?>">
-				<h4>
-					<?php echo esc_html( $bumblebee_banner_text ); ?>
-					<svg aria-hidden="true" data-prefix="fas" data-icon="chevron-right" class="nl-right-arrow svg-inline--fa fa-chevron-right fa-w-10" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-						<path fill="" d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"></path>
-					</svg>
-				</h4>
-			</a>
+<div class="pure-g newsletter-sign-below-header hide-on-mobile">
+	<div class="pure-u-sm-1 pure-u-md-1 pure-u-lg-1 pure-u-xl-1 nl-signup-link">
+		<div class="header-banner-container">
+			<h4><span><?php echo native_content_get_field( 'paid_post_notice' ); ?></span></h4>
 		</div>
 	</div>
-<?php endif; ?>
+</div>
 <!-- #site-navigation -->
 
 <?php
